@@ -7,6 +7,7 @@ classDiagram
 
     class Usario {
   +id: integer
+  +imgPerfil: string
   +nome: string
   +e-mail: string
   +password: string
@@ -16,34 +17,45 @@ classDiagram
 
 class Jogo {
   +id: integer
-  +idCriador: UsarioId
+  +idCriadoPor: Usario.id
   +nome: string
-  +criadoPor: string
+  +imgCapa: string
+  +desenvolvedora: string
+  +publicadora: string
   +dataLancamento: date
   +descricao: string
   +avaliacao: Avaliacao
+  +dadosPicos: dadosPico[]
   +comentarios: Comentario[]
 }
 
 class Avaliacao {
   +id: integer
   +idJogo: JogoId
-  +idCriador: UsuarioId
+  +idCriador: Usuario.id
   +nota: integer
   +texto: string 
 }
 
 class Comentario {
   +id: integer
-  +idJogo: JogoId
-  +idPai: ComentarioId | null
-  +idCriador: UsuarioId
+  +idJogo: Jogo.id
+  +idPai: Comentario.id | null
+  +idCriador: Usuario.id
   +texto: String
   +likes: integer
   +dislikes: integer
 }
 
+class DadosPico {
+    +id: integer
+    +idJogo: Jogo.id
+    +data: date
+    +picoUsuarios: integer
+}
+
 
 Jogo --  Avaliacao 
 Jogo  --* Comentario
+Jogo --* DadosPico
 ```
